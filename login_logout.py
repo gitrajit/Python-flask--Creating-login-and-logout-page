@@ -75,7 +75,10 @@ def add_user_action():
     except (MySQLdb.Error, MySQLdb.Warning) as e:
         e = "{} is already a user. Please use another username.".format(user_name)
         return render_template('signupMODI.html', err = e)
-
+@app.route('/forgot')
+def forgot():
+    return render_template('password.html')
+    
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
