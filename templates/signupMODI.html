@@ -1,0 +1,58 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+    <body>
+        <div class="container">
+            <br><br><br><br><br>
+
+                <div id="container_demo" >
+
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            {% if err %}
+                                <div class="alert alert-warning alert-dismissable" role="alert">
+
+                                {{ err }}
+                                </div>
+                            {% endif %}
+
+                            <form  action="/adduseraction", method="post", autocomplete="on">
+                                <h1> Sign up </h1>
+                                <p>
+                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="username" />
+                                </p>
+                                <p>
+                                    <label for="emailsignup" class="youmail" data-icon="e" >E-mail</label>
+                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder=".....@example.com"/>
+                                </p>
+                                <p>
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
+                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="password"/>
+                                </p>
+                                <p>
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="password"/>
+                                </p>
+                                <p class="signin button">
+									<input type="submit" value="Sign up"/>
+								</p>
+                                <p class="change_link">
+									Already a member ?
+									<a href="/" class="to_register"> Go and log in </a>
+								</p>
+                            </form>
+
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+    </body>
+
+{% endblock %}
