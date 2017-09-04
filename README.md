@@ -26,7 +26,7 @@ import MySQLdb
 
 ### Installing
 
-Need to Install Python and to install the others pacakges we need to install pip
+Need to Install Python and pip.
 
 For unix
 
@@ -37,7 +37,7 @@ apt-get pip
 yum install python
 yum install python
 ```
-Once pip in stalled , you can use pip to install flask and others packages
+Once pip installed , you can use pip to install flask and others packages
 
 ```
 pip install flask
@@ -56,19 +56,19 @@ pip install -r requirements.txt
 
 for window users
 
-From https://www.python.org/download/releases/2.7.6 download appropriate Python 2.7.10 Windows Installer. (If that link doesn't work, check https://www.python.org/downloads/)
+1. From https://www.python.org/download/releases/2.7.6 download appropriate Python 2.7.10 Windows Installer. (If that link doesn't work, check https://www.python.org/downloads/)
 Run the file
-Select install for all users or install just for me, click Next
-You'll see it installs under the C:\Python27 folder, click Next
-Click Next again for the 'Customize Python' step
-Click Finish
-Open Control Panel, then System
-Click 'Advanced system settings' on the left
-Click the 'Environment Variables' button
-Under 'System variables' click the variable called 'Path' then the 'Edit...' button. (This will set it for all users, you could instead choose to edit the User variables to just set python as a command prompt command for the current user)
-Without deleting any other text, add C:\Python27; (include the semi-colon) to the beginning of the 'Variable value' and click OK.
-Click OK on the 'Environment Variables' window.
-Open a new command prompt window type python, you will have python running in the command prompt. Note: command prompt windows open prior to setting the Environment Variable will not have the python command available.
+2. Select install for all users or install just for me, click Next
+3. You'll see it installs under the C:\Python27 folder, click Next
+4 .Click Next again for the 'Customize Python' step
+5. Click Finish
+6. Open Control Panel, then System
+7. Click 'Advanced system settings' on the left
+8. Click the 'Environment Variables' button
+9. Under 'System variables' click the variable called 'Path' then the 'Edit...' button. (This will set it for all users, you could instead choose to edit the User variables to just set python as a command prompt command for the current user)
+10. Without deleting any other text, add C:\Python27; (include the semi-colon) to the beginning of the 'Variable value' and click OK.
+11. Click OK on the 'Environment Variables' window.
+12. Open a new command prompt window type python, you will have python running in the command prompt. Note: command prompt windows open prior to setting the Environment Variable will not have the python command available.
 
 open Command prompt as **Administrator**
 
@@ -78,3 +78,15 @@ C:\Python27\Scripts>
 C:\Python27\Scripts>pip -r requirements.txt
 
 ```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the webpage
+
+Run the main python file to start.
+
+```
+C:\Python27\python.exe login_logout.py
+ * Running on http://127.0.0.1:10/ (Press CTRL+C to quit)
+ 
+ ```
