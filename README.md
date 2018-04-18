@@ -1,4 +1,4 @@
-# Python-Flask - Login and logout of a webpage
+# Python-Flask - Login and logout of a webpage.
 
 This is an example to show how we can use Flask framework for creating a webpage.
 
