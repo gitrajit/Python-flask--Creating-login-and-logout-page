@@ -3,13 +3,17 @@ from flask import *
 import os
 from datetime import datetime
 from functools import wraps
-import MySQLdb
+from models import get_connecttion
 
 app = Flask(__name__)
-
+app.secret_key = 'Randon1234khkjhkjhkjhkjhkjstuwqqwe'
 @app.route('/')
 def index():
+    print("i am here")
     return render_template('mainlogin.html')
+
+
+
 
 
 @app.route('/log', methods=['GET', 'POST'])
@@ -18,14 +22,15 @@ def login():
     if request.method == 'POST':
         username_form = request.form['username']
         password_form = request.form['password']
-        passwd = base64.b64encode(password_form)
+        # passwd = base64.b64encode(password_form)
         try:
-            dcn, cur = get_connecttion()
-            cur.execute("SELECT COUNT(1) FROM user WHERE user_name = %s;", [username_form]) # CHECKS IF USERNAME EXSIST
+            con = get_connecttion()
+            cur = con.cursor()
+            cur.execute("SELECT COUNT(1) FROM users WHERE username = '%s'" % username_form) # CHECKS IF USERNAME EXSIST
             if cur.fetchone()[0]:
-                cur.execute("SELECT password FROM user WHERE user_name = %s;", [username_form]) # FETCH THE HASHED PASSWORD
+                cur.execute("SELECT password FROM users WHERE username = '%s'" % username_form) # FETCH THE HASHED PASSWORD
                 for row in cur.fetchall():
-                    if passwd == row[0]:
+                    if password_form == row[0]:
                         session['logged_in'] = True
                         session['STU'] = True
                         session['username'] = username_form
@@ -38,12 +43,12 @@ def login():
             else:
                 e = "Invalid Credential"
                 return render_template('mainlogin.html', error=e)
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
 
             return render_template('mainlogin.html', error=e)
   
   
-  def login_required(test):
+def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):
         if 'logged_in' in session:
@@ -52,27 +57,50 @@ def login():
             flash('You need to login first')
             return redirect(url_for('index'))
     return wrap
- 
- 
- @app.route('/signup')
+
+
+@app.route('/password', methods=["post"])
+def password():
+    if request.method == 'POST':
+        username_form = request.form['username']
+        # password_form = request.form['password']
+        # passwd = base64.b64encode(password_form)
+        try:
+            con = get_connecttion()
+            cur = con.cursor()
+            cur.execute("SELECT COUNT(1) FROM users WHERE username = '%s'" % username_form) # CHECKS IF USERNAME EXSIST
+            if cur.fetchone()[0]:
+                passw = cur.execute("SELECT password FROM users WHERE username = '%s'" % username_form)  # FETCH THE HASHED PASSWORD
+                flash(f"Password is {passw.fetchone()[0]}")
+                return render_template('mainlogin.html')
+
+            else:
+                e = "Invalid Credential"
+                return render_template('mainlogin.html', error=e)
+        except Exception as e:
+            flash(f"Error: {e}")
+            return render_template('mainlogin.html')
+
+@app.route('/signup')
 def sign_up():
     return render_template('signupMODI.html')
- @app.route("/adduseraction", methods=["post"])
+@app.route("/adduseraction", methods=["post"])
 def add_user_action():
     # global first_name, last_name, email
     if request.form:
         user_name = request.form['usernamesignup']
         password = request.form['passwordsignup']
-        email = request.form['emailsignup']
-        passwd = base64.b64encode(password)
-    query = "insert into user values (0,'%s','%s','%s')"
-    query = query % (user_name, passwd, email)
+        # email = request.form['emailsignup']
+        # passwd = base64.b64encode(password)
+    query = "insert into users values (0,'%s','%s')"
+    query = query % (user_name, password)
     try:
-        dcn, cur = get_connecttion()
+        dcn = get_connecttion()
+        cur = dcn.cursor()
         cur.execute(query)
         dcn.commit()
         return render_template('Sucess.html', user=user_name )
-    except (MySQLdb.Error, MySQLdb.Warning) as e:
+    except Exception as e:
         e = "{} is already a user. Please use another username.".format(user_name)
         return render_template('signupMODI.html', err = e)
 @app.route('/forgot')
@@ -95,5 +123,5 @@ def server_error(e):
     return render_template('mainlogin.html')
 
 if __name__ == '__main__':
-    app.run(port=10 , debug=False)
+    app.run(port=5050 , debug=False)
 
