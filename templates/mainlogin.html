@@ -1,8 +1,47 @@
 {% extends "header.html" %}
 
 {% block body %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" xmlns="http://www.w3.org/1999/html">
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../static/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/animate-custom.css" />
 
+
+        <meta name=viewport content="width=device-width,initial-scale=1">
+<link href = "{{ url_for('static', filename='css/qualysscan.css') }}" rel=stylesheet>
+<script type="text/javascript" language="javascript" src="../static/js/qualysscan.js">
+    </script>
+<style>
+    h2{
+  font-size:1.5em;
+  color:#525252;
+}
+</style>
     <body>
+     <script>
+        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+        // prevent form submit
+        const form = document.querySelector("form");
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
         <div class="container">
             <br><br><br><br><br>
 
