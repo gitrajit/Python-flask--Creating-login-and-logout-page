@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-* Python 2.7 or later
+* Python 3.7 or later
 * Flask 0.11.1 or later
 * functools any versions
 * base64 any versions
